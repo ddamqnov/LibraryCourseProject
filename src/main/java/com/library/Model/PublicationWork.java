@@ -32,6 +32,9 @@ public abstract class PublicationWork {
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Set<Rating> ratings;
 
+    @NotNull
+    private PublicationWorkType type;
+
     public long getId() {
         return id;
     }
