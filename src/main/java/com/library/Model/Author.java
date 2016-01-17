@@ -6,9 +6,6 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
 
-/**
- * Created by D on 16.1.2016 г..
- */
 @Entity
 public class Author {
     @Id
@@ -17,6 +14,14 @@ public class Author {
     @NotNull
     @Length(min = 3)
     private String name;
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
 
     public String getName() {
         return name;

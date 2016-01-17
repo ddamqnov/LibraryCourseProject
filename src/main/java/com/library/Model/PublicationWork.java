@@ -7,24 +7,20 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
 import java.util.List;
-
-/**
- * Created by D on 16.1.2016 г..
- */
+import java.util.Set;
 
 @Entity
-public class PublicationWork {
+public abstract class PublicationWork {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue
     private long id;
 
     @NotNull
-    @Length(min = 3)
+    @Length(min = 3, max = 200)
     private String title;
 
     @ManyToMany
-    @NotNull
-    private List<Author> authors;
+    private Set<Author> authors;
 
     @NotNull
     @Min(1)
@@ -33,10 +29,24 @@ public class PublicationWork {
     @NotNull
     private Date publicationDate;
 
-    @NotNull
-    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private Set<Rating> ratings;
 
-    private Rating rating;
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public Set<Rating> getRatings() {
+        return ratings;
+    }
+
+    public void setRating(Set<Rating> ratings) {
+        this.ratings = ratings;
+    }
 
     public String getTitle() {
         return title;
@@ -46,11 +56,11 @@ public class PublicationWork {
         this.title = title;
     }
 
-    public List<Author> getAuthors() {
+    public Set<Author> getAuthors() {
         return authors;
     }
 
-    public void setAuthors(List<Author> authors) {
+    public void setAuthors(Set<Author> authors) {
         this.authors = authors;
     }
 
@@ -68,21 +78,5 @@ public class PublicationWork {
 
     public void setPublicationDate(Date publicationDate) {
         this.publicationDate = publicationDate;
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public Rating getRating() {
-        return rating;
-    }
-
-    public void setRating(Rating rating) {
-        this.rating = rating;
     }
 }

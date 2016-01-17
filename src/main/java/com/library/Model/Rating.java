@@ -1,30 +1,30 @@
 package com.library.Model;
 
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.validation.constraints.NotNull;
+import org.hibernate.validator.constraints.Length;
 
-/**
- * Created by D on 16.1.2016 г..
- */
+import javax.persistence.*;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.NotNull;
+import java.util.List;
 
 @Entity
 public class Rating {
-
     @Id
     @GeneratedValue
     private long id;
 
     @NotNull
-    private int votes = 0;
+    @Length(max = 50)
+    private String ip;
 
     @NotNull
-    private double rating = 0;
+    @Max(10)
+    private byte value;
 
-    @NotNull
-    private double average = 0;
+    @ManyToOne
+    @JoinColumn(insertable=false, updatable=false,nullable=false)
+    private PublicationWork publicationWork;
 
     public long getId() {
         return id;
@@ -34,27 +34,27 @@ public class Rating {
         this.id = id;
     }
 
-    public int getVotes() {
-        return votes;
+    public String getIp() {
+        return ip;
     }
 
-    public void setVotes(int votes) {
-        this.votes = votes;
+    public void setIp(String ip) {
+        this.ip = ip;
     }
 
-    public double getRating() {
-        return rating;
+    public byte getValue() {
+        return value;
     }
 
-    public void setRating(double rating) {
-        this.rating = rating;
+    public void setValue(byte value) {
+        this.value = value;
     }
 
-    public double getAverage() {
-        return average;
+    public PublicationWork getPublicationWork() {
+        return publicationWork;
     }
 
-    public void setAverage(double average) {
-        this.average = average;
+    public void setPublicationWork(PublicationWork publicationWork) {
+        this.publicationWork = publicationWork;
     }
 }
