@@ -2,9 +2,15 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title></title>
+    <title>Library system</title>
+    <script src="lib/angular.js"></script>
 </head>
 <body>
-Hello
+<div ng-app="library" ng-cloak>
+    Hello {{ 2 + 2 }}
+</div>
+<script>
+    angular.module('library', []);
+</script>
 </body>
 </html>
