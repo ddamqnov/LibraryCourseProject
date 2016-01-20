@@ -1,6 +1,6 @@
 package com.library.Model;
 
-public enum PublicationWorkType {
+public enum PublicationWorkGenre {
     SCI_FI,
     FANTASY,
     POETRY,

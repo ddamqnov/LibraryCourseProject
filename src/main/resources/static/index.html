@@ -1,16 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Library system</title>
-    <script src="lib/angular.js"></script>
+    <meta charset="UTF-8" />
+    <title>Library</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet" />
+    <link href="css/site.css" rel="stylesheet" />
+    <script src="js/angular.js"></script>
 </head>
 <body>
-<div ng-app="library" ng-cloak>
-    Hello {{ 2 + 2 }}
+<div ng-app="librarySystem" ng-cloak ng-controller="HomeController as vm">
+    <div class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <a href="/" class="navbar-brand">Library</a>
+                <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-main">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+            <div class="navbar-collapse collapse" id="navbar-main">
+                <ul class="nav navbar-nav">
+                    <li class="dropdown">
+                        <a href="/create">Create publication work</a>
+                    </li>
+                    <li>
+                        <a href="/filters">Filter publication works</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
 </div>
-<script>
-    angular.module('library', []);
-</script>
+<script src="js/jquery-2.2.0.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="app/app.js"></script>
 </body>
 </html>

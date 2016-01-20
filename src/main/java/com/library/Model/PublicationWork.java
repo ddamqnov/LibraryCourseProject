@@ -6,7 +6,6 @@ import javax.persistence.*;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
-import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -33,7 +32,7 @@ public abstract class PublicationWork {
     private Set<Rating> ratings;
 
     @NotNull
-    private PublicationWorkType type;
+    private PublicationWorkGenre genre;
 
     public long getId() {
         return id;
@@ -81,5 +80,13 @@ public abstract class PublicationWork {
 
     public void setPublicationDate(Date publicationDate) {
         this.publicationDate = publicationDate;
+    }
+
+    public PublicationWorkGenre getGenre() {
+        return genre;
+    }
+
+    public void setGenre(PublicationWorkGenre genre) {
+        this.genre = genre;
     }
 }
