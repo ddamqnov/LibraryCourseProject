@@ -9,15 +9,13 @@ import com.library.Service.AuthorService;
 import com.library.Service.BookService;
 import com.library.Service.MagazineService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.HashSet;
 import java.util.Set;
 
 @RestController
-@RequestMapping(value = "publicationwork")
 public class PublicationWorkController {
     @Autowired
     private BookService bookService;
@@ -28,8 +26,8 @@ public class PublicationWorkController {
     @Autowired
     private AuthorService authorService;
 
-    @RequestMapping(value = "", method = RequestMethod.POST)
-    public PublicationWorkModel Create(PublicationWorkModel publicationWork) {
+    @RequestMapping(value = "/publicationwork", method = RequestMethod.POST)
+    public PublicationWorkModel create(@Valid @RequestBody PublicationWorkModel publicationWork) {
         if (publicationWork.getType() == PublicationWorkType.BOOK) {
             Book newBook = this.mapPublicationWorkModelToBook(publicationWork);
 
@@ -47,8 +45,8 @@ public class PublicationWorkController {
         return publicationWork;
     }
 
-    @RequestMapping(value = "", method = RequestMethod.PUT)
-    public PublicationWorkModel Put(PublicationWorkModel publicationWork) {
+    @RequestMapping(value = "/publicationwork", method = RequestMethod.PUT)
+    public PublicationWorkModel update(PublicationWorkModel publicationWork) {
         if (publicationWork.getType() == PublicationWorkType.BOOK) {
             Book book = this.mapPublicationWorkModelToBook(publicationWork);
 
@@ -94,7 +92,7 @@ public class PublicationWorkController {
 
         Set<Author> authors = new HashSet<>();
 
-        for(String authorName: splittedAuthors) {
+        for (String authorName : splittedAuthors) {
             String trimmedAuthorName = authorName.trim();
             if (trimmedAuthorName.length() > 1) {
                 Author author = this.authorService.getAuthorByName(trimmedAuthorName);

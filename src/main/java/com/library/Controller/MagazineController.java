@@ -11,29 +11,27 @@ public class MagazineController {
     private MagazineService magazineService;
 
     @RequestMapping(value = "/magazine", method = RequestMethod.GET)
-    public Iterable<Magazine> getAllBooks() {
+    public Iterable<Magazine> getAllMagazines() {
         return magazineService.getAll();
     }
 
     @RequestMapping(value = "/magazine/{id}", method = RequestMethod.GET)
-    public Magazine getBook(@RequestParam long id) {
+    public Magazine getMagazine(@RequestParam long id) {
         return magazineService.getMagazineById(id);
     }
 
     @RequestMapping(value = "/magazine", method = RequestMethod.POST)
-    public Magazine getBook(@RequestBody Magazine magazine) {
+    public Magazine createMagazine(@RequestBody Magazine magazine) {
         return magazineService.save(magazine);
     }
 
-
     @RequestMapping(value = "/magazine", method = RequestMethod.PUT)
-    public Magazine updateBook(@RequestBody Magazine magazine) {
+    public Magazine updateMagazine(@RequestBody Magazine magazine) {
         return magazineService.updateMagazine(magazine);
     }
 
-    @RequestMapping(value = "/magazine/{id}", method = RequestMethod.DELETE)
-    public void deleteBook(@RequestParam long id) {
+    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+    public void deleteMagazine(@RequestParam long id) {
         magazineService.deleteMagazine(id);
     }
-
 }
