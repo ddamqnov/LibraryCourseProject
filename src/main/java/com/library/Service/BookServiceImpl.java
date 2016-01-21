@@ -3,13 +3,14 @@ package com.library.Service;
 import com.library.Model.Book;
 import com.library.Repository.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 
-/**
- * Created by D on 16.1.2016 г..
- */
 @Service
 @Transactional
 public class BookServiceImpl implements BookService {
@@ -20,6 +21,11 @@ public class BookServiceImpl implements BookService {
     @Override
     public Iterable<Book> getAll() {
         return bookRepository.findAll();
+    }
+
+    @Override
+    public Page<Book> page(Pageable pageable) {
+        return bookRepository.findAll(pageable);
     }
 
     @Override

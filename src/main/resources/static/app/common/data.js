@@ -2,13 +2,12 @@
     'use strict';
 
     function data($http, $q, notifier, baseServiceUrl) {
-
         function get(url, queryParams) {
             var defered = $q.defer();
 
             var authHeader = authorization.getAuthorizationHeader();
 
-            $http.get(baseServiceUrl + '/' + url, { params: queryParams, headers: authHeader })
+            $http.get(baseServiceUrl + '/' + url, { params: queryParams })
                 .then(function (response) {
                     defered.resolve(response.data);
                 }, function (error) {

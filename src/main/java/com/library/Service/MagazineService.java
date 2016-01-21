@@ -2,9 +2,6 @@ package com.library.Service;
 
 import com.library.Model.Magazine;
 
-/**
- * Created by D on 16.1.2016 г..
- */
 public interface MagazineService {
     Iterable<Magazine> getAll();
 

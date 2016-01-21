@@ -7,9 +7,6 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 
-/**
- * Created by D on 16.1.2016 г..
- */
 @Service
 @Transactional
 public class MagazineServiceImpl implements MagazineService {

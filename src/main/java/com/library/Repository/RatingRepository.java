@@ -2,9 +2,8 @@ package com.library.Repository;
 
 import com.library.Model.Rating;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
 
-/**
- * Created by D on 16.1.2016 г..
- */
+@Repository
 public interface RatingRepository extends CrudRepository<Rating, Long> {
 }
