@@ -11,7 +11,6 @@ import com.library.Service.MagazineService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -27,7 +26,7 @@ public class PublicationWorkController {
     private AuthorService authorService;
 
     @RequestMapping(value = "/publicationwork", method = RequestMethod.POST)
-    public PublicationWorkModel create(@Valid @RequestBody PublicationWorkModel publicationWork) {
+    public PublicationWorkModel create(@RequestBody PublicationWorkModel publicationWork) {
         if (publicationWork.getType() == PublicationWorkType.BOOK) {
             Book newBook = this.mapPublicationWorkModelToBook(publicationWork);
 

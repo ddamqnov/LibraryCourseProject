@@ -48,6 +48,4 @@ public class BookServiceImpl implements BookService {
         // update attributes
         return null;
     }
-
-
 }

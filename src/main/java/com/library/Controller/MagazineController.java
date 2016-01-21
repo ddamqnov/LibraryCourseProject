@@ -30,7 +30,7 @@ public class MagazineController {
         return magazineService.updateMagazine(magazine);
     }
 
-    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/magazine/{id}", method = RequestMethod.DELETE)
     public void deleteMagazine(@RequestParam long id) {
         magazineService.deleteMagazine(id);
     }

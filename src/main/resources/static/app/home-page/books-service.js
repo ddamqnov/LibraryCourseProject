@@ -3,7 +3,7 @@ $(function () {
 
     function booksService(data) {
         function getLastBooks(count) {
-            return data.get('book/last', { page: 1, size: count, sort: 'id,desc' });
+            return data.get('book/last', { count: count });
         }
 
         return {

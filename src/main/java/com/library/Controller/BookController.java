@@ -3,7 +3,9 @@ package com.library.Controller;
 import com.library.Model.Book;
 import com.library.Service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -11,8 +13,9 @@ public class BookController {
     @Autowired
     private BookService bookService;
 
-    @RequestMapping(value = "/book/last", method = RequestMethod.GET)
-    public Iterable<Book> getLast(@RequestParam Pageable pageable) {
+    @RequestMapping(value = "/book/last/{count}", method = RequestMethod.GET)
+    public Iterable<Book> getLast(@RequestParam int count) {
+        Pageable pageable = new PageRequest(0, count, new Sort(Sort.Direction.DESC, "id"));
         return bookService.getPage(pageable).getContent();
     }
 
