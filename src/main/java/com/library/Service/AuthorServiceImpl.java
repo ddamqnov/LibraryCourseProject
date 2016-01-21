@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import javax.transaction.Transactional;
+import java.util.List;
 
 @Service
 @Transactional
@@ -31,7 +32,12 @@ public class AuthorServiceImpl implements AuthorService {
 
     @Override
     public Author getAuthorByName(String name) {
-        throw new NotImplementedException();
+        List<Author> authors = authorRepository.getAuthorByName(name);
+        if(authors.isEmpty()){
+            return null;
+        } else {
+            return authors.get(0);
+        }
     }
 
     @Override
