@@ -28,13 +28,15 @@ public class PublicationWorkController {
     @RequestMapping(value = "/publicationwork", method = RequestMethod.POST)
     public PublicationWorkModel create(@RequestBody PublicationWorkModel publicationWork) {
         if (publicationWork.getType() == PublicationWorkType.BOOK) {
-            Book newBook = this.mapPublicationWorkModelToBook(publicationWork);
+            Book newBook = publicationWork.toBook();
+            newBook.setAuthors(this.getAuthors(publicationWork.getAuthors()));
 
             newBook = bookService.save(newBook);
 
             publicationWork.setId(newBook.getId());
         } else {
-            Magazine newMagazine = this.mapPublicationWorkModelToMagazine(publicationWork);
+            Magazine newMagazine = publicationWork.toMagazine();
+            newMagazine.setAuthors(this.getAuthors(publicationWork.getAuthors()));
 
             newMagazine = magazineService.save(newMagazine);
 
@@ -47,43 +49,18 @@ public class PublicationWorkController {
     @RequestMapping(value = "/publicationwork", method = RequestMethod.PUT)
     public PublicationWorkModel update(PublicationWorkModel publicationWork) {
         if (publicationWork.getType() == PublicationWorkType.BOOK) {
-            Book book = this.mapPublicationWorkModelToBook(publicationWork);
+            Book book = publicationWork.toBook();
+            book.setAuthors(this.getAuthors(publicationWork.getAuthors()));
 
             bookService.updateBook(book);
         } else {
-            Magazine magazine = this.mapPublicationWorkModelToMagazine(publicationWork);
+            Magazine magazine = publicationWork.toMagazine();
+            magazine.setAuthors(this.getAuthors(publicationWork.getAuthors()));
 
             magazineService.updateMagazine(magazine);
         }
 
         return publicationWork;
-    }
-
-    private Book mapPublicationWorkModelToBook(PublicationWorkModel publicationWork) {
-        Book book = new Book();
-
-        book.setGenre(publicationWork.getGenre());
-        book.setPages(publicationWork.getPages());
-        book.setTitle(publicationWork.getTitle());
-        book.setPublicationDate(publicationWork.getPublicationDate());
-        book.setAuthors(this.getAuthors(publicationWork.getAuthors()));
-        book.setGenre(publicationWork.getGenre());
-
-        return book;
-    }
-
-    private Magazine mapPublicationWorkModelToMagazine(PublicationWorkModel publicationWork) {
-        Magazine magazine = new Magazine();
-
-        magazine.setGenre(publicationWork.getGenre());
-        magazine.setPages(publicationWork.getPages());
-        magazine.setTitle(publicationWork.getTitle());
-        magazine.setPublicationDate(publicationWork.getPublicationDate());
-        magazine.setAuthors(this.getAuthors(publicationWork.getAuthors()));
-        magazine.setGenre(publicationWork.getGenre());
-        magazine.setIssue(publicationWork.getIssue());
-
-        return magazine;
     }
 
     private Set<Author> getAuthors(String mergedAuthors) {

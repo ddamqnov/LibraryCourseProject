@@ -1,7 +1,7 @@
 $(function () {
     'use strict';
 
-    function HomePageController(books) {
+    function HomePageController(books, magazines) {
         var vm = this;
 
         books
@@ -9,8 +9,14 @@ $(function () {
             .then(function(booksData) {
                 vm.books = booksData;
             });
+
+        magazines
+            .getLastMagazines(10)
+            .then(function(magazinesData) {
+                vm.magazines = magazinesData;
+            });
     }
 
     angular.module('librarySystem.controllers')
-        .controller('HomePageController', ['books', HomePageController]);
+        .controller('HomePageController', ['books', 'magazines', HomePageController]);
 }());

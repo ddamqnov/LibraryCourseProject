@@ -1,5 +1,7 @@
 package com.library.Dto;
 
+import com.library.Model.Book;
+import com.library.Model.Magazine;
 import com.library.Model.PublicationWorkGenre;
 
 import java.util.Date;
@@ -83,5 +85,30 @@ public class PublicationWorkModel {
 
     public void setId(long id) {
         this.id = id;
+    }
+
+    public Book toBook(){
+        Book book = new Book();
+
+        book.setGenre(this.getGenre());
+        book.setPages(this.getPages());
+        book.setTitle(this.getTitle());
+        book.setPublicationDate(this.getPublicationDate());
+        book.setGenre(this.getGenre());
+
+        return book;
+    }
+
+    public Magazine toMagazine() {
+        Magazine magazine = new Magazine();
+
+        magazine.setGenre(this.getGenre());
+        magazine.setPages(this.getPages());
+        magazine.setTitle(this.getTitle());
+        magazine.setPublicationDate(this.getPublicationDate());
+        magazine.setGenre(this.getGenre());
+        magazine.setIssue(this.getIssue());
+
+        return magazine;
     }
 }

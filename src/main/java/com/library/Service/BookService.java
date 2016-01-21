@@ -1,13 +1,12 @@
 package com.library.Service;
 
 import com.library.Model.Book;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 public interface BookService {
     Iterable<Book> getAll();
 
-    Page<Book> getPage(Pageable pageable);
+    Iterable<Book> getPage(Pageable pageable);
 
     Book save(Book book);
 

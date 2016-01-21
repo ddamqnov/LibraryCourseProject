@@ -24,8 +24,8 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public Page<Book> getPage(Pageable pageable) {
-        return bookRepository.findAll(pageable);
+    public Iterable<Book> getPage(Pageable pageable) {
+        return bookRepository.findAll(pageable).getContent();
     }
 
     @Override
