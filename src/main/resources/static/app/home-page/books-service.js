@@ -1,9 +1,9 @@
 $(function () {
     'use strict';
 
-    function booksService($q, data) {
+    function booksService(data) {
         function getLastBooks(count) {
-            return data.get('book/last', { page: 1, limit: count });
+            return data.get('book/last', { page: 1, size: count, sort: 'id,desc' });
         }
 
         return {
@@ -12,5 +12,5 @@ $(function () {
     }
 
     angular.module('librarySystem.services')
-        .factory('booksService', ['$q', 'data', booksService]);
+        .factory('books', ['data', booksService]);
 }());

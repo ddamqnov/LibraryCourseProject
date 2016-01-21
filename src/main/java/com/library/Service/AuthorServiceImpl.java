@@ -4,6 +4,7 @@ import com.library.Model.Author;
 import com.library.Repository.AuthorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import javax.transaction.Transactional;
 
@@ -26,6 +27,11 @@ public class AuthorServiceImpl implements AuthorService {
     @Override
     public Author getAuthorById(Long id) {
         return authorRepository.findOne(id);
+    }
+
+    @Override
+    public Author getAuthorByName(String name) {
+        throw new NotImplementedException();
     }
 
     @Override

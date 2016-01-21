@@ -1,17 +1,16 @@
 $(function () {
     'use strict';
 
-    function HomePageController(booksService) {
+    function HomePageController(books) {
         var vm = this;
 
-        booksService
+        books
             .getLastBooks(10)
-            .then(function(books) {
-                vm.books = books;
-                console.log(books);
+            .then(function(booksData) {
+                vm.books = booksData;
             });
     }
 
     angular.module('librarySystem.controllers')
-        .controller('HomePageController', ['booksService', HomePageController]);
+        .controller('HomePageController', ['books', HomePageController]);
 }());

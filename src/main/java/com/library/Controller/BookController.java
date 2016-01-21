@@ -3,13 +3,8 @@ package com.library.Controller;
 import com.library.Model.Book;
 import com.library.Service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
-
-/**
- * Created by D on 16.1.2016 г..
- */
 
 @RestController
 @RequestMapping(value = "book")
@@ -18,8 +13,8 @@ public class BookController {
     private BookService bookService;
 
     @RequestMapping(value = "last", method = RequestMethod.GET)
-    public Page<Book> getLast(Pageable pageable) {
-        return bookService.page(pageable);
+    public Iterable<Book> getLast(Pageable pageable) {
+        return bookService.getPage(pageable).getContent();
     }
 
     @RequestMapping(value = "{id}", method = RequestMethod.GET)

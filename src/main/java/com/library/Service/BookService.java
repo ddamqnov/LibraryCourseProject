@@ -7,7 +7,7 @@ import org.springframework.data.domain.Pageable;
 public interface BookService {
     Iterable<Book> getAll();
 
-    Page<Book> page(Pageable pageable);
+    Page<Book> getPage(Pageable pageable);
 
     Book save(Book book);
 

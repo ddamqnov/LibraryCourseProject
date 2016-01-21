@@ -12,6 +12,11 @@ $(function () {
                 controller: 'HomePageController',
                 controllerAs: CONTROLLER_VIEW_MODEL_NAME,
             })
+            .when('/create', {
+                templateUrl: VIEWS_BASE_DIRECTORY + 'create-publication-work/create-publication-work-view.html',
+                controller: 'CreatePublicationWorkController',
+                controllerAs: CONTROLLER_VIEW_MODEL_NAME,
+            })
             .otherwise({ redirectTo: '/' });
     };
 

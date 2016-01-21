@@ -5,8 +5,6 @@
         function get(url, queryParams) {
             var defered = $q.defer();
 
-            var authHeader = authorization.getAuthorizationHeader();
-
             $http.get(baseServiceUrl + '/' + url, { params: queryParams })
                 .then(function (response) {
                     defered.resolve(response.data);
@@ -22,6 +20,20 @@
             var defered = $q.defer();
 
             $http.post(baseServiceUrl + '/' + url, postData)
+                .then(function (response) {
+                    defered.resolve(response.data);
+                }, function (error) {
+                    notifier.error(error);
+                    defered.reject(error);
+                });
+
+            return defered.promise;
+        }
+
+        function put(url, putData) {
+            var defered = $q.defer();
+
+            $http.put(baseServiceUrl + '/' + url, putData)
                 .then(function (response) {
                     defered.resolve(response.data);
                 }, function (error) {

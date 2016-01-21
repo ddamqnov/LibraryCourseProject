@@ -5,10 +5,6 @@ import com.library.Service.MagazineService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-/**
- * Created by D on 16.1.2016 г..
- */
-
 @RestController
 public class MagazineController {
     @Autowired
