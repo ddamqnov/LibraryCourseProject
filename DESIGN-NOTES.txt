@@ -2,5 +2,5 @@ Views:
 - Index screen -> last 10 publication works with links to details (only title, authors, type, rating) - DONE!
 - Publication work details -> show everything + rating option - DONE!
 - Create publication -> title textbox; authors textbox (split by comma); publication date input; publication genre dropdown; publication type (book/magazine); issue (if magazine) - DONE!
-- Filters page -> filter publication works by author; filter publication works by genre;
+- Filters page -> filter publication works by author; filter publication works by genre; -> DONE!
 - Option to view the publication works in list view or in grid???
