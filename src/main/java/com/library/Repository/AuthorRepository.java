@@ -10,6 +10,6 @@ import java.util.List;
 
 @Repository
 public interface AuthorRepository extends CrudRepository<Author, Long> {
-    @Query("SELECT author FROM Author as author WHERE author.name = (:name)")
+    @Query("SELECT author FROM Author author WHERE author.name = (:name)")
     List<Author> getAuthorByName(@Param("name") String authorName);
 }

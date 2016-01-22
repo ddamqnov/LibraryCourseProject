@@ -32,6 +32,10 @@ public class PublicationWorkSimpleResponseModel {
         return rating;
     }
 
+    public void setRating(double rating) {
+        this.rating = rating;
+    }
+
     public int getIssue() {
         return issue;
     }
