@@ -22,9 +22,10 @@
             </div>
             <div class="row">
                 <div class="col-md-2">Publication date:</div>
-                <div class="col-md-10"><strong>{{vm.publicationWork.publicationDate | date: 'dd/MM/yyyy'}}</strong>
+                <div class="col-md-10">
+                    <strong>{{vm.publicationWork.publicationDate | date: 'dd/MM/yyyy'}}</strong>
                 </div>
-                <hr/>
+                <hr />
             </div>
             <div class="row">
                 <div class="col-md-2">Genre:</div>
@@ -38,7 +39,7 @@
                         {{vm.publicationWork.rating === null ? 'N/A' : vm.publicationWork.rating + ' / 10'}}
                     </strong>
                 </div>
-                <hr/>
+                <hr ng-show="!vm.publicationWork.hasBeenRatedByIp"/>
             </div>
             <div class="row" ng-show="!vm.publicationWork.hasBeenRatedByIp">
                 <div class="col-md-2">Rate it!</div>

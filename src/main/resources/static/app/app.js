@@ -17,6 +17,11 @@ $(function () {
                 controller: 'CreatePublicationWorkController',
                 controllerAs: CONTROLLER_VIEW_MODEL_NAME,
             })
+            .when('/all-publicationworks', {
+                templateUrl: VIEWS_BASE_DIRECTORY + 'all-publication-works/all-publication-works-view.html',
+                controller: 'AllPublicationWorksController',
+                controllerAs: CONTROLLER_VIEW_MODEL_NAME,
+            })
             .when('/publicationwork/:id', {
                 templateUrl: VIEWS_BASE_DIRECTORY + 'publication-work-details/publication-work-details-view.html',
                 controller: 'PublicationWorkDetailsController',

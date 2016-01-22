@@ -11,22 +11,8 @@
                 </div>
                 <div class="panel-body">
                     <div class="text-center" ng-show="!vm.books.length">No books...</div>
-                    <table class="table table-bordered" ng-show="vm.books.length">
-                        <thead>
-                        <tr>
-                            <th class="text-center">Title</th>
-                            <th class="text-center">Author(s)</th>
-                            <th class="text-center">Rating</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr ng-repeat="book in vm.books">
-                            <td><a ng-href="#/publicationwork/{{book.id}}">{{ book.title }}</a></td>
-                            <td>{{ book.authors }}</td>
-                            <td>{{ book.rating === null ? 'N/A' : book.rating + ' / 10' }}</td>
-                        </tr>
-                        </tbody>
-                    </table>
+
+                    <div publication-works="vm.books"></div>
                 </div>
             </div>
         </div>
@@ -38,23 +24,8 @@
                 </div>
                 <div class="panel-body">
                     <div class="text-center" ng-show="!vm.magazines.length">No books...</div>
-                    <table class="table table-bordered" ng-show="vm.magazines.length">
-                        <thead>
-                        <tr>
-                            <th class="text-center">Title</th>
-                            <th class="text-center">Author(s)</th>
-                            <th class="text-center">Rating</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr ng-repeat="magazine in vm.magazines">
-                            <td><a ng-href="#/publicationwork/{{magazine.id}}">{{ magazine.title }} (Issue: {{
-                                magazine.issue }})</a></td>
-                            <td>{{ magazine.authors }}</td>
-                            <td>{{ magazine.rating === null ? 'N/A' : magazine.rating + ' / 10' }}</td>
-                        </tr>
-                        </tbody>
-                    </table>
+
+                    <div publication-works="vm.magazines"></div>
                 </div>
             </div>
         </div>

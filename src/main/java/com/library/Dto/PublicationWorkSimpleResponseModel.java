@@ -1,9 +1,6 @@
 package com.library.Dto;
 
-import com.library.Model.Author;
-import com.library.Model.Book;
-import com.library.Model.Magazine;
-import com.library.Model.PublicationWork;
+import com.library.Model.*;
 
 public class PublicationWorkSimpleResponseModel {
     protected long id;
@@ -15,6 +12,10 @@ public class PublicationWorkSimpleResponseModel {
     protected Double rating;
 
     protected int issue;
+
+    protected PublicationWorkGenre genre;
+
+    protected PublicationWorkType type;
 
     public long getId() {
         return id;
@@ -40,14 +41,27 @@ public class PublicationWorkSimpleResponseModel {
         return issue;
     }
 
+    public PublicationWorkGenre getGenre() {
+        return genre;
+    }
+
+    public PublicationWorkType getType() {
+        return type;
+    }
+
     public static PublicationWorkSimpleResponseModel fromBook(Book book) {
-        return fromPublicationWorkEntityModel(book);
+        PublicationWorkSimpleResponseModel publicationWork = fromPublicationWorkEntityModel(book);
+
+        publicationWork.type = PublicationWorkType.BOOK;
+
+        return publicationWork;
     }
 
     public static PublicationWorkSimpleResponseModel fromMagazine(Magazine magazine) {
         PublicationWorkSimpleResponseModel publicationWork = fromPublicationWorkEntityModel(magazine);
 
         publicationWork.issue = magazine.getIssue();
+        publicationWork.type = PublicationWorkType.MAGAZINE;
 
         return publicationWork;
     }
@@ -72,6 +86,7 @@ public class PublicationWorkSimpleResponseModel {
 
         publicationWork.title = pubWork.getTitle();
         publicationWork.id = pubWork.getId();
+        publicationWork.genre = pubWork.getGenre();
         publicationWork.authors = getAuthorsMerged(pubWork.getAuthors());
 
         return publicationWork;

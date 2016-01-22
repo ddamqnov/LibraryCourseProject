@@ -3,24 +3,15 @@ package com.library.Dto;
 import com.library.Model.Book;
 import com.library.Model.Magazine;
 import com.library.Model.PublicationWork;
-import com.library.Model.PublicationWorkGenre;
 
 import java.util.Date;
 
 public class PublicationWorkDetailsResponseModel extends PublicationWorkSimpleResponseModel {
-    private PublicationWorkGenre genre;
-
     private Date publicationDate;
 
     private int pages;
 
-    private PublicationWorkType type;
-
     private boolean hasBeenRatedByIp;
-
-    public PublicationWorkGenre getGenre() {
-        return genre;
-    }
 
     public Date getPublicationDate() {
         return publicationDate;
@@ -28,10 +19,6 @@ public class PublicationWorkDetailsResponseModel extends PublicationWorkSimpleRe
 
     public int getPages() {
         return pages;
-    }
-
-    public PublicationWorkType getType() {
-        return type;
     }
 
     public boolean isHasBeenRatedByIp() {
