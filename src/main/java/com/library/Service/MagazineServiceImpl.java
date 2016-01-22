@@ -1,6 +1,5 @@
 package com.library.Service;
 
-import com.library.Model.Book;
 import com.library.Model.Magazine;
 import com.library.Repository.MagazineRepository;
 import org.springframework.beans.factory.annotation.Autowired;

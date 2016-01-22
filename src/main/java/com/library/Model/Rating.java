@@ -23,7 +23,7 @@ public class Rating {
     private byte value;
 
     @ManyToOne
-    @JoinColumn(insertable=false, updatable=false,nullable=false)
+    @JoinColumn(updatable=false,nullable=false)
     private PublicationWork publicationWork;
 
     public long getId() {

@@ -12,6 +12,4 @@ public interface AuthorService {
     Author getAuthorByName(String name);
 
     void deleteAuthor(Long id);
-
-    Author updateAuthor(Author author);
 }

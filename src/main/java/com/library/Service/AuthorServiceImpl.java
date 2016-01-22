@@ -17,22 +17,23 @@ public class AuthorServiceImpl implements AuthorService {
 
     @Override
     public Iterable<Author> getAll() {
-        return authorRepository.findAll();
+        return this.authorRepository.findAll();
     }
 
     @Override
     public Author save(Author author) {
-        return authorRepository.save(author);
+        return this.authorRepository.save(author);
     }
 
     @Override
     public Author getAuthorById(Long id) {
-        return authorRepository.findOne(id);
+        return this.authorRepository.findOne(id);
     }
 
     @Override
     public Author getAuthorByName(String name) {
-        List<Author> authors = authorRepository.getAuthorByName(name);
+        List<Author> authors = this.authorRepository.getAuthorByName(name);
+
         if(authors.isEmpty()){
             return null;
         } else {
@@ -42,11 +43,6 @@ public class AuthorServiceImpl implements AuthorService {
 
     @Override
     public void deleteAuthor(Long id) {
-        authorRepository.delete(id);
-    }
-
-    @Override
-    public Author updateAuthor(Author author) {
-        return null;
+        this.authorRepository.delete(id);
     }
 }

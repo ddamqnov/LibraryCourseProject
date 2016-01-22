@@ -16,17 +16,25 @@ public class RatingServiceImpl implements RatingService {
 
     @Override
     public void save(Rating rating) {
-        ratingRepository.save(rating);
+        this.ratingRepository.save(rating);
     }
 
     @Override
     public Double getAverageRatingOfPublicationWork(long id) {
-        List<Double> result = ratingRepository.getAverageRatingOfPublicationWork(id);
+        List<Double> result = this.ratingRepository.getAverageRatingOfPublicationWork(id);
 
         if (result.isEmpty()) {
             return null;
         }
 
         return result.get(0);
+    }
+
+    @Override
+    public boolean publicationWorkHasBeenRatedByIp(long publicationWorkId, String ip) {
+        List<Long> ratingsCountForPublicationWorkByIp =
+            this.ratingRepository.getRatingsCountForPublicationWorkByIp(publicationWorkId, ip);
+
+        return !ratingsCountForPublicationWorkByIp.isEmpty() && ratingsCountForPublicationWorkByIp.get(0) > 0L;
     }
 }

@@ -9,7 +9,7 @@
                 .then(function (response) {
                     defered.resolve(response.data);
                 }, function (error) {
-                    notifier.error(error);
+                    notifier.error(getErrorMessage(error));
                     defered.reject(error);
                 });
 
@@ -23,7 +23,7 @@
                 .then(function (response) {
                     defered.resolve(response.data);
                 }, function (error) {
-                    notifier.error(error);
+                    notifier.error(getErrorMessage(error));
                     defered.reject(error);
                 });
 
@@ -37,11 +37,15 @@
                 .then(function (response) {
                     defered.resolve(response.data);
                 }, function (error) {
-                    notifier.error(error);
+                    notifier.error(getErrorMessage(error));
                     defered.reject(error);
                 });
 
             return defered.promise;
+        }
+
+        function getErrorMessage(error) {
+            return error.data && error.data.message || error;
         }
 
         return {

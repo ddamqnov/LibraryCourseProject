@@ -6,15 +6,15 @@ import com.library.Model.Magazine;
 import com.library.Model.PublicationWork;
 
 public class PublicationWorkSimpleResponseModel {
-    private long id;
+    protected long id;
 
-    private String title;
+    protected String title;
 
-    private String authors;
+    protected String authors;
 
-    private Double rating;
+    protected Double rating;
 
-    private int issue;
+    protected int issue;
 
     public long getId() {
         return id;
@@ -52,17 +52,7 @@ public class PublicationWorkSimpleResponseModel {
         return publicationWork;
     }
 
-    private static PublicationWorkSimpleResponseModel fromPublicationWorkEntityModel(PublicationWork pubWork) {
-        PublicationWorkSimpleResponseModel publicationWork = new PublicationWorkSimpleResponseModel();
-
-        publicationWork.title = pubWork.getTitle();
-        publicationWork.id = pubWork.getId();
-        publicationWork.authors = getAuthorsMerged(pubWork.getAuthors());
-
-        return publicationWork;
-    }
-
-    private static String getAuthorsMerged(Iterable<Author> authors) {
+    protected static String getAuthorsMerged(Iterable<Author> authors) {
         StringBuilder result = new StringBuilder();
 
         for (Author author: authors) {
@@ -75,5 +65,15 @@ public class PublicationWorkSimpleResponseModel {
         }
 
         return result.toString();
+    }
+
+    private static PublicationWorkSimpleResponseModel fromPublicationWorkEntityModel(PublicationWork pubWork) {
+        PublicationWorkSimpleResponseModel publicationWork = new PublicationWorkSimpleResponseModel();
+
+        publicationWork.title = pubWork.getTitle();
+        publicationWork.id = pubWork.getId();
+        publicationWork.authors = getAuthorsMerged(pubWork.getAuthors());
+
+        return publicationWork;
     }
 }
