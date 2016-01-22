@@ -1,7 +1,7 @@
 $(function () {
     'use strict';
 
-    function PublicationWorkDetailsController(publicationWorks, ratings, $routeParams, $location) {
+    function PublicationWorkDetailsController(publicationWorks, ratings, $routeParams, notifier, $location) {
         var vm = this;
 
         vm.POSSIBLE_RATINGS = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
@@ -16,6 +16,7 @@ $(function () {
                 .then(function (newAverageRating) {
                     vm.publicationWork.rating = newAverageRating;
                     vm.publicationWork.hasBeenRatedByIp = true;
+                    notifier.success('You have successfully rated this publication work!');
                 });
         }
 
@@ -31,5 +32,5 @@ $(function () {
     }
 
     angular.module('librarySystem.controllers')
-        .controller('PublicationWorkDetailsController',['publicationWorks', 'ratings', '$routeParams', '$location', PublicationWorkDetailsController]);
+        .controller('PublicationWorkDetailsController',['publicationWorks', 'ratings', '$routeParams', 'notifier', '$location', PublicationWorkDetailsController]);
 }());
