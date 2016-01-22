@@ -28,9 +28,9 @@ public class BookController {
 
         List<PublicationWorkSimpleResponseModel> result = new ArrayList<>();
         for (Book book: books) {
-            PublicationWorkSimpleResponseModel publicaticationWork = PublicationWorkSimpleResponseModel.fromBook(book);
-            publicaticationWork.setRating(this.ratingService.getAverageRatingOfPublicationWork(book.getId()));
-            result.add(publicaticationWork);
+            PublicationWorkSimpleResponseModel publicationWork = PublicationWorkSimpleResponseModel.fromBook(book);
+            publicationWork.setRating(this.ratingService.getAverageRatingOfPublicationWork(book.getId()));
+            result.add(publicationWork);
         }
 
         return result;

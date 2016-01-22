@@ -3,6 +3,7 @@ package com.library.Controller;
 import com.library.Dto.PublicationWorkSimpleResponseModel;
 import com.library.Model.Magazine;
 import com.library.Service.MagazineService;
+import com.library.Service.RatingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -17,6 +18,9 @@ public class MagazineController {
     @Autowired
     private MagazineService magazineService;
 
+    @Autowired
+    private RatingService ratingService;
+
     @RequestMapping(value = "/magazine/last", method = RequestMethod.GET)
     public Iterable<PublicationWorkSimpleResponseModel> getLast(@RequestParam int count) {
         Pageable pageable = new PageRequest(0, count, new Sort(Sort.Direction.DESC, "id"));
@@ -24,7 +28,9 @@ public class MagazineController {
 
         List<PublicationWorkSimpleResponseModel> result = new ArrayList<>();
         for (Magazine magazine: magazines) {
-            result.add(PublicationWorkSimpleResponseModel.fromMagazine(magazine));
+            PublicationWorkSimpleResponseModel publicationWork = PublicationWorkSimpleResponseModel.fromMagazine(magazine);
+            publicationWork.setRating(this.ratingService.getAverageRatingOfPublicationWork(magazine.getId()));
+            result.add(publicationWork);
         }
 
         return result;

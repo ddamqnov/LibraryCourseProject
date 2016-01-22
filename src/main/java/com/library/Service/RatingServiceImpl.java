@@ -20,11 +20,11 @@ public class RatingServiceImpl implements RatingService {
     }
 
     @Override
-    public double getAverageRatingOfPublicationWork(long id) {
+    public Double getAverageRatingOfPublicationWork(long id) {
         List<Double> result = ratingRepository.getAverageRatingOfPublicationWork(id);
 
-        if (result.isEmpty() || result.get(0) == null) {
-            return 0;
+        if (result.isEmpty()) {
+            return null;
         }
 
         return result.get(0);

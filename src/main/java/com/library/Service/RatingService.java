@@ -5,5 +5,5 @@ import com.library.Model.Rating;
 public interface RatingService {
     void save(Rating rating);
 
-    double getAverageRatingOfPublicationWork(long id);
+    Double getAverageRatingOfPublicationWork(long id);
 }
