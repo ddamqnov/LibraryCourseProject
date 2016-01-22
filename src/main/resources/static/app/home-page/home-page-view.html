@@ -10,7 +10,8 @@
                     <h4 class="text-center">Latest books</h4>
                 </div>
                 <div class="panel-body">
-                    <table class="table table-bordered">
+                    <div class="text-center" ng-show="!vm.books.length">No books...</div>
+                    <table class="table table-bordered" ng-show="vm.books.length">
                         <thead>
                         <tr>
                             <th class="text-center">Title</th>
@@ -36,7 +37,8 @@
                     <h4 class="text-center">Latest magazines</h4>
                 </div>
                 <div class="panel-body">
-                    <table class="table table-bordered">
+                    <div class="text-center" ng-show="!vm.magazines.length">No books...</div>
+                    <table class="table table-bordered" ng-show="vm.magazines.length">
                         <thead>
                         <tr>
                             <th class="text-center">Title</th>
@@ -46,7 +48,8 @@
                         </thead>
                         <tbody>
                         <tr ng-repeat="magazine in vm.magazines">
-                            <td><a ng-href="#/publicationwork/{{magazine.id}}">{{ magazine.title }} (Issue: {{ magazine.issue }})</a></td>
+                            <td><a ng-href="#/publicationwork/{{magazine.id}}">{{ magazine.title }} (Issue: {{
+                                magazine.issue }})</a></td>
                             <td>{{ magazine.authors }}</td>
                             <td>{{ magazine.rating === null ? 'N/A' : magazine.rating + ' / 10' }}</td>
                         </tr>
