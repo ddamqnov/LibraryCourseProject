@@ -11,7 +11,7 @@
     <tr ng-repeat="publicationWork in publicationWorks">
         <td>
             <a ng-href="#/publicationwork/{{publicationWork.id}}">
-                {{ publicationWork.title + (publicationWork.type == 'BOOK' ? '' : ' (Issue: ' + publicationWork.issue + ')')}}
+                {{ publicationWork.title + (publicationWork.type == 'BOOK' ? '' : ' (Issue: ' + publicationWork.issue + ')') }}
             </a>
         </td>
         <td>{{ publicationWork.authors }}</td>

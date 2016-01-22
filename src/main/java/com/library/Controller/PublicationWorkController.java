@@ -1,20 +1,15 @@
 package com.library.Controller;
 
-import com.library.Dto.PublicationWorkDetailsResponseModel;
-import com.library.Dto.PublicationWorkModel;
-import com.library.Dto.PublicationWorkSimpleResponseModel;
-import com.library.Dto.PublicationWorkType;
+import com.library.Dto.*;
 import com.library.Model.Author;
 import com.library.Model.Book;
 import com.library.Model.Magazine;
+import com.library.Model.PublicationWorkGenre;
 import com.library.Service.AuthorService;
 import com.library.Service.BookService;
 import com.library.Service.MagazineService;
 import com.library.Service.RatingService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -25,6 +20,9 @@ import java.util.Set;
 
 @RestController
 public class PublicationWorkController {
+    private static final int MAX_PAGE_SIZE = 20;
+    private static final int DEFAULT_PAGE_SIZE = 10;
+
     @Autowired
     private BookService bookService;
 
@@ -39,11 +37,12 @@ public class PublicationWorkController {
 
     @RequestMapping(value = "/book/last", method = RequestMethod.GET)
     public Iterable<PublicationWorkSimpleResponseModel> getLastBooks(@RequestParam int count) {
-        Pageable pageable = new PageRequest(0, count, new Sort(Sort.Direction.DESC, "id"));
-        Iterable<Book> books = bookService.getPage(pageable);
+        int pageSize = Math.min(count, MAX_PAGE_SIZE);
+
+        Iterable<Book> books = this.bookService.getPage(0, pageSize);
 
         List<PublicationWorkSimpleResponseModel> result = new ArrayList<>();
-        for (Book book: books) {
+        for (Book book : books) {
             PublicationWorkSimpleResponseModel publicationWork = PublicationWorkSimpleResponseModel.fromBook(book);
             publicationWork.setRating(this.ratingService.getAverageRatingOfPublicationWork(book.getId()));
             result.add(publicationWork);
@@ -54,11 +53,12 @@ public class PublicationWorkController {
 
     @RequestMapping(value = "/magazine/last", method = RequestMethod.GET)
     public Iterable<PublicationWorkSimpleResponseModel> getLastMagazines(@RequestParam int count) {
-        Pageable pageable = new PageRequest(0, count, new Sort(Sort.Direction.DESC, "id"));
-        Iterable<Magazine> magazines = magazineService.getPage(pageable);
+        int pageSize = Math.min(count, MAX_PAGE_SIZE);
+
+        Iterable<Magazine> magazines = magazineService.getPage(0, pageSize);
 
         List<PublicationWorkSimpleResponseModel> result = new ArrayList<>();
-        for (Magazine magazine: magazines) {
+        for (Magazine magazine : magazines) {
             PublicationWorkSimpleResponseModel publicationWork = PublicationWorkSimpleResponseModel.fromMagazine(magazine);
             publicationWork.setRating(this.ratingService.getAverageRatingOfPublicationWork(magazine.getId()));
             result.add(publicationWork);
@@ -120,7 +120,7 @@ public class PublicationWorkController {
     }
 
     @RequestMapping(value = "/publicationwork", method = RequestMethod.PUT)
-    public PublicationWorkModel update(PublicationWorkModel publicationWork) {
+    public PublicationWorkModel update(@RequestBody PublicationWorkModel publicationWork) {
         if (publicationWork.getType() == PublicationWorkType.BOOK) {
             Book book = publicationWork.toBook();
             book.setAuthors(this.getAuthors(publicationWork.getAuthors()));
@@ -134,6 +134,58 @@ public class PublicationWorkController {
         }
 
         return publicationWork;
+    }
+
+    @RequestMapping(value = "/publicationwork/filter")
+    public FilteredPublicationWorksResponseModel filter(
+            @RequestParam PublicationWorksFilterType type,
+            @RequestParam String value,
+            @RequestParam int page) throws Exception {
+        FilteredPublicationWorksResponseModel result = new FilteredPublicationWorksResponseModel();
+
+        Iterable<Book> books = null;
+        Iterable<Magazine> magazines = null;
+
+        switch (type) {
+            case AUTHOR:
+                Author author = this.authorService.getAuthorByName(value);
+                if (author != null) {
+                    books = this.bookService.getByAuthor(author, page, DEFAULT_PAGE_SIZE);
+                    magazines = this.magazineService.getByAuthor(author, page, DEFAULT_PAGE_SIZE);
+                }
+
+                break;
+            case GENRE:
+                books = this.bookService.getByGenre(PublicationWorkGenre.valueOf(value), page, DEFAULT_PAGE_SIZE);
+                magazines = this.magazineService.getByGenre(PublicationWorkGenre.valueOf(value), page, DEFAULT_PAGE_SIZE);
+                break;
+            default:
+                throw new Exception("Invalid filter type!");
+        }
+
+        if (books != null) {
+            List<PublicationWorkSimpleResponseModel> bookResponseModels = new ArrayList<>();
+            for (Book book : books) {
+                PublicationWorkSimpleResponseModel publicationWork = PublicationWorkSimpleResponseModel.fromBook(book);
+                publicationWork.setRating(this.ratingService.getAverageRatingOfPublicationWork(book.getId()));
+                bookResponseModels.add(publicationWork);
+            }
+
+            result.setBooks(bookResponseModels);
+        }
+
+        if (magazines != null) {
+            List<PublicationWorkSimpleResponseModel> magazineResponseModels = new ArrayList<>();
+            for (Magazine magazine : magazines) {
+                PublicationWorkSimpleResponseModel publicationWork = PublicationWorkSimpleResponseModel.fromMagazine(magazine);
+                publicationWork.setRating(this.ratingService.getAverageRatingOfPublicationWork(magazine.getId()));
+                magazineResponseModels.add(publicationWork);
+            }
+
+            result.setMagazines(magazineResponseModels);
+        }
+
+        return result;
     }
 
     private Set<Author> getAuthors(String mergedAuthors) {

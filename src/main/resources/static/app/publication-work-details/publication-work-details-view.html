@@ -4,22 +4,26 @@
             <span>{{ vm.publicationWork.type == 'BOOK' ? 'Book' : 'Magazine' }}</span>:
             <h1 class="panel-title">{{vm.publicationWork.title}}</h1>
         </header>
+
         <section class="panel-body">
             <div class="row">
                 <div class="col-md-2">Authors:</div>
                 <div class="col-md-10"><strong>{{vm.publicationWork.authors}}</strong></div>
                 <hr/>
             </div>
+
             <div class="row" ng-show="vm.publicationWork.type == 'MAGAZINE'">
                 <div class="col-md-2">Issue:</div>
                 <div class="col-md-10"><strong>{{vm.publicationWork.issue}}</strong></div>
                 <hr/>
             </div>
+
             <div class="row">
                 <div class="col-md-2">Pages:</div>
                 <div class="col-md-10"><strong>{{vm.publicationWork.pages}}</strong></div>
                 <hr/>
             </div>
+
             <div class="row">
                 <div class="col-md-2">Publication date:</div>
                 <div class="col-md-10">
@@ -27,11 +31,13 @@
                 </div>
                 <hr />
             </div>
+
             <div class="row">
                 <div class="col-md-2">Genre:</div>
                 <div class="col-md-10"><strong>{{vm.publicationWork.genre}}</strong></div>
                 <hr/>
             </div>
+
             <div class="row">
                 <div class="col-md-2">Rating:</div>
                 <div class="col-md-10">
@@ -41,6 +47,7 @@
                 </div>
                 <hr ng-show="!vm.publicationWork.hasBeenRatedByIp"/>
             </div>
+
             <div class="row" ng-show="!vm.publicationWork.hasBeenRatedByIp">
                 <div class="col-md-2">Rate it!</div>
                 <div class="col-md-10">
@@ -54,6 +61,7 @@
                                     </option>
                                 </select>
                             </div>
+
                             <div class="col-md-2">
                                 <button class="btn btn-primary" ng-disabled="ratePublicationWorkForm.$invalid"
                                         ng-click="vm.ratePublicationWork(newRating.value)">
@@ -66,5 +74,6 @@
             </div>
         </section>
     </div>
+
     <button type="button" class="btn btn-default pull-left" onclick="window.history.back();">Back</button>
 </article>

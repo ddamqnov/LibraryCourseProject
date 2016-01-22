@@ -1,12 +1,13 @@
 package com.library.Service;
 
+import com.library.Model.Author;
 import com.library.Model.Book;
-import org.springframework.data.domain.Pageable;
+import com.library.Model.PublicationWorkGenre;
 
 public interface BookService {
     Iterable<Book> getAll();
 
-    Iterable<Book> getPage(Pageable pageable);
+    Iterable<Book> getPage(int page, int pageSize);
 
     Book save(Book book);
 
@@ -15,4 +16,8 @@ public interface BookService {
     void deleteBook(Long id);
 
     Book updateBook(Book book);
+
+    Iterable<Book> getByAuthor(Author author, int page, int pageSize);
+
+    Iterable<Book> getByGenre(PublicationWorkGenre genre, int page, int pageSize);
 }

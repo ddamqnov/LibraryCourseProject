@@ -4,7 +4,7 @@ $(function () {
     function PublicationWorkDetailsController(publicationWorks, ratings, $routeParams, notifier, $location) {
         var vm = this;
 
-        vm.POSSIBLE_RATINGS = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+        vm.POSSIBLE_RATINGS = [10, 9, 8, 7, 6, 5, 4, 3, 2, 1];
 
         var publicationWorkId = $routeParams.id;
 
