@@ -56,16 +56,16 @@
         <div class="col-md-6">
             <div class="panel panel-success">
                 <div class="panel-heading text-center">Books</div>
-                <div class="panel-body" ng-show="vm.books && vm.books.length" publication-works="vm.books"></div>
-                <div class="panel-body" ng-show="!vm.books || !vm.books.length">No books...</div>
+                <div class="panel-body" ng-if="vm.books && vm.books.length" publication-works="vm.books"></div>
+                <div class="panel-body" ng-if="!vm.books || !vm.books.length">No books...</div>
             </div>
         </div>
         <div class="col-md-6">
             <div class="panel panel-info">
                 <div class="panel-heading text-center">Magazines</div>
-                <div class="panel-body" ng-show="vm.magazines && vm.magazines.length"
+                <div class="panel-body" ng-if="vm.magazines && vm.magazines.length"
                      publication-works="vm.magazines"></div>
-                <div class="panel-body" ng-show="!vm.magazines || !vm.magazines.length">No magazines...</div>
+                <div class="panel-body" ng-if="!vm.magazines || !vm.magazines.length">No magazines...</div>
             </div>
         </div>
     </div>

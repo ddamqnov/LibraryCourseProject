@@ -10,9 +10,9 @@
                     <h4 class="text-center">Latest books</h4>
                 </div>
                 <div class="panel-body">
-                    <div ng-show="!vm.books.length">No books...</div>
+                    <div ng-if="!vm.books.length">No books...</div>
 
-                    <div publication-works="vm.books" ng-show="vm.books.length"></div>
+                    <div publication-works="vm.books" ng-if="vm.books.length"></div>
                 </div>
             </div>
         </div>
@@ -23,9 +23,9 @@
                     <h4 class="text-center">Latest magazines</h4>
                 </div>
                 <div class="panel-body">
-                    <div ng-show="!vm.magazines.length">No magazines...</div>
+                    <div ng-if="!vm.magazines.length">No magazines...</div>
 
-                    <div publication-works="vm.magazines" ng-show="vm.magazines.length"></div>
+                    <div publication-works="vm.magazines" ng-if="vm.magazines.length"></div>
                 </div>
             </div>
         </div>
