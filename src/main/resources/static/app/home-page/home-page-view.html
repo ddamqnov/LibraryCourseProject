@@ -5,27 +5,27 @@
     </div>
     <div class="row">
         <div class="col-md-6">
-            <div class="panel panel-success text-center">
+            <div class="panel panel-success">
                 <div class="panel-heading">
                     <h4 class="text-center">Latest books</h4>
                 </div>
                 <div class="panel-body">
-                    <div class="text-center" ng-show="!vm.books.length">No books...</div>
+                    <div ng-show="!vm.books.length">No books...</div>
 
-                    <div publication-works="vm.books"></div>
+                    <div publication-works="vm.books" ng-show="vm.books.length"></div>
                 </div>
             </div>
         </div>
 
         <div class="col-md-6">
-            <div class="panel panel-info text-center">
+            <div class="panel panel-info">
                 <div class="panel-heading">
                     <h4 class="text-center">Latest magazines</h4>
                 </div>
                 <div class="panel-body">
-                    <div class="text-center" ng-show="!vm.magazines.length">No magazines...</div>
+                    <div ng-show="!vm.magazines.length">No magazines...</div>
 
-                    <div publication-works="vm.magazines"></div>
+                    <div publication-works="vm.magazines" ng-show="vm.magazines.length"></div>
                 </div>
             </div>
         </div>
